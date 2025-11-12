@@ -1,6 +1,8 @@
 package tn.esprit.tpprojet.services;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.tpprojet.entities.DetailProjet;
 import tn.esprit.tpprojet.entities.Equipe;
@@ -10,6 +12,9 @@ import tn.esprit.tpprojet.repositories.EquipeRepository;
 import tn.esprit.tpprojet.repositories.ProjetRepository;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+@Slf4j
 @AllArgsConstructor
 @Service
 public class ProjetServiceImpl implements IProjetService{
@@ -27,9 +32,19 @@ public class ProjetServiceImpl implements IProjetService{
         projetRepository.deleteById(id);
     }
 
+    //@Scheduled(fixedDelay = 10000) en millisecondes
+    //@Scheduled(fixedRate = 10, timeUnit = TimeUnit.SECONDS, initialDelay = 7)
+    @Scheduled(cron = "10 * * * * *", zone = "Europe/Istanbul")
     @Override
     public List<Projet> findAllProjet() {
-        return projetRepository.findAll();
+        List<Projet> projets = projetRepository.findAll();
+        //Thread.sleep(5000); ajouter throws dans la fonction
+        //ajoute le au delay donc y aura exec chaque 15 secondes, au lieu de 10s seulement
+        for(Projet projet : projets) {
+            log.info(projet.toString());
+        }
+        return projets;
+        //return projetRepository.findAll();
     }
 
     @Override

@@ -5,9 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.tpprojet.entities.DetailProjet;
+import tn.esprit.tpprojet.entities.Entreprise;
 import tn.esprit.tpprojet.entities.Equipe;
 import tn.esprit.tpprojet.entities.Projet;
 import tn.esprit.tpprojet.repositories.DetailProjetRepository;
+import tn.esprit.tpprojet.repositories.EntrepriseRepository;
 import tn.esprit.tpprojet.repositories.EquipeRepository;
 import tn.esprit.tpprojet.repositories.ProjetRepository;
 
@@ -21,6 +23,7 @@ public class ProjetServiceImpl implements IProjetService{
     final ProjetRepository projetRepository;
     final DetailProjetRepository detailProjetRepository;
     private final EquipeRepository equipeRepository;
+    private final EntrepriseRepository entrepriseRepository;
 
     @Override
     public Projet addOrUpdateProjet(Projet projet) {
@@ -86,6 +89,11 @@ public class ProjetServiceImpl implements IProjetService{
     @Override
     public List<DetailProjet> findByTechnologiesContains(String technologie) {
         return detailProjetRepository.findByTechnologiesContains(technologie);
+    }
+
+    @Override
+    public List<Entreprise> retrieveByAddress(String adresse) {
+        return entrepriseRepository.retrieveByAddress(adresse);
     }
 
 }

@@ -1,6 +1,8 @@
 package tn.esprit.tpprojet.services;
 
+import org.springframework.data.repository.query.Param;
 import tn.esprit.tpprojet.entities.DetailProjet;
+import tn.esprit.tpprojet.entities.Entreprise;
 import tn.esprit.tpprojet.entities.Equipe;
 import tn.esprit.tpprojet.entities.Projet;
 
@@ -16,4 +18,5 @@ public interface IProjetService {
     Equipe assignProjectsToEquipe(long idEquipe, List<Long> idProjet);
     Projet addProjectAndAssignProjetD(Projet projet, long idPd);
     List<DetailProjet> findByTechnologiesContains(String technologie);
+    List<Entreprise> retrieveByAddress(String adresse);
 }

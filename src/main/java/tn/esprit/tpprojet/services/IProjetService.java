@@ -1,5 +1,6 @@
 package tn.esprit.tpprojet.services;
 
+import tn.esprit.tpprojet.entities.DetailProjet;
 import tn.esprit.tpprojet.entities.Equipe;
 import tn.esprit.tpprojet.entities.Projet;
 
@@ -14,4 +15,5 @@ public interface IProjetService {
     Equipe assignProjectToEquipe(long idProjet, long idEquipe);
     Equipe assignProjectsToEquipe(long idEquipe, List<Long> idProjet);
     Projet addProjectAndAssignProjetD(Projet projet, long idPd);
+    List<DetailProjet> findByTechnologiesContains(String technologie);
 }

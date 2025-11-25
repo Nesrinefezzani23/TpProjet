@@ -83,4 +83,9 @@ public class ProjetServiceImpl implements IProjetService{
         return null;
     }
 
+    @Override
+    public List<DetailProjet> findByTechnologiesContains(String technologie) {
+        return detailProjetRepository.findByTechnologiesContains(technologie);
+    }
+
 }
